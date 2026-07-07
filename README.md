@@ -39,27 +39,17 @@ It uses a **Linear Regression** model trained on a synthetic (but realistic) dat
 
 ## 📸 Screenshots
 
-### 🏠 Home Page
+<table>
+<tr>
+<td><img src="screenshots/home.png" width="400"></td>
+<td><img src="screenshots/predict.png" width="400"></td>
+</tr>
 
-![Home Page](screenshots/home.png)
-
----
-
-### 🎯 Prediction Page
-
-![Prediction Page](screenshots/predict.png)
-
----
-
-### ✅ Prediction Result
-
-![Prediction Result](screenshots/result.png)
-
----
-
-### 📊 Dashboard
-
-![Dashboard](screenshots/dashboard.png)
+<tr>
+<td><img src="screenshots/result.png" width="400"></td>
+<td><img src="screenshots/dashboard.png" width="400"></td>
+</tr>
+</table>
 
 ## 🛠️ Technologies Used
 
