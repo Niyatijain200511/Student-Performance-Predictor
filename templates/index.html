@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">📊 Student Performance Predictor</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+                <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Predict Your Exam Performance</h1>
+            <p class="hero-subtitle">
+                A simple Machine Learning based web app that predicts a student's final
+                exam score using study habits like study hours, attendance, sleep,
+                and assignment completion.
+            </p>
+            <a href="{{ url_for('predict') }}" class="btn-primary">Predict Score</a>
+        </div>
+
+        <div class="hero-image">
+            <!-- Simple student illustration made using SVG -->
+            <img src="{{ url_for('static', filename='images/student_illustration.svg') }}"
+                 alt="Student studying illustration">
+        </div>
+    </section>
+
+    <!-- Info Cards Section -->
+    <section class="info-section">
+        <h2>How This Project Works</h2>
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="info-icon">📚</div>
+                <h3>1. Enter Your Details</h3>
+                <p>Fill in your study hours, attendance, sleep hours and other habits.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🤖</div>
+                <h3>2. ML Model Predicts</h3>
+                <p>A trained Linear Regression model estimates your final exam score.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">💡</div>
+                <h3>3. Get Suggestions</h3>
+                <p>Receive simple, personalized tips to help improve your performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Student Performance Predictor &copy; 2026 | Built with Flask &amp; Scikit-learn</p>
+    </footer>
+
+</body>
+</html>

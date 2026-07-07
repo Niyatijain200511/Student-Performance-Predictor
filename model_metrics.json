@@ -1,0 +1,20 @@
+{
+    "r2_score": 87.79,
+    "mae": 4.09,
+    "feature_importance": {
+        "study_hours": 4.173516533134344,
+        "attendance": 0.21286318200732418,
+        "previous_score": 0.2771838848619828,
+        "assignments_completed": 1.7100764035251095,
+        "sleep_hours": 1.009581477878719,
+        "internet_access_encoded": 2.0731047595950183
+    },
+    "feature_columns": [
+        "study_hours",
+        "attendance",
+        "previous_score",
+        "assignments_completed",
+        "sleep_hours",
+        "internet_access_encoded"
+    ]
+}

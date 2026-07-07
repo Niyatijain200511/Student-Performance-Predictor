@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Performance Predictor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">📊 Student Performance Predictor</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                <li><a href="{{ url_for('dashboard') }}" class="active">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard-section">
+        <h1>Dataset &amp; Model Insights</h1>
+        <p class="dashboard-subtitle">
+            A quick look at the data used to train the model, along with how
+            well the model actually performs.
+        </p>
+
+        <!-- Model Accuracy Cards -->
+        <div class="metrics-row">
+            <div class="metric-card">
+                <h3>Model Accuracy (R&sup2;)</h3>
+                <p class="metric-value">{{ r2_score }}%</p>
+                <span class="metric-note">How well the model explains the data</span>
+            </div>
+            <div class="metric-card">
+                <h3>Mean Absolute Error</h3>
+                <p class="metric-value">{{ mae }}</p>
+                <span class="metric-note">Average difference between predicted and actual scores</span>
+            </div>
+            <div class="metric-card">
+                <h3>Total Records</h3>
+                <p class="metric-value">500</p>
+                <span class="metric-note">Students used to train and test the model</span>
+            </div>
+        </div>
+
+        <!-- Dataset Preview -->
+        <div class="dashboard-card">
+            <h2>Dataset Preview (First 10 Rows)</h2>
+            <div class="table-wrapper">
+                {{ dataset_preview | safe }}
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+
+            <div class="dashboard-card">
+                <h2>Correlation Heatmap</h2>
+                <img src="data:image/png;base64,{{ heatmap_image }}" alt="Correlation heatmap of dataset features">
+            </div>
+
+            <div class="dashboard-card">
+                <h2>Study Hours vs Final Score</h2>
+                <img src="data:image/png;base64,{{ study_vs_score_image }}" alt="Scatter plot of study hours vs final score">
+            </div>
+
+            <div class="dashboard-card">
+                <h2>Attendance Distribution</h2>
+                <img src="data:image/png;base64,{{ attendance_dist_image }}" alt="Histogram of attendance percentage">
+            </div>
+
+            <div class="dashboard-card">
+                <h2>Feature Importance</h2>
+                <img src="data:image/png;base64,{{ feature_importance_image }}" alt="Bar chart of feature importance">
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Student Performance Predictor &copy; 2026 | Built with Flask &amp; Scikit-learn</p>
+    </footer>
+
+</body>
+</html>

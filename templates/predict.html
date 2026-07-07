@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Score - Student Performance Predictor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">📊 Student Performance Predictor</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('predict') }}" class="active">Predict</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="predict-section">
+        <div class="predict-container">
+
+            <!-- Left side: Input form -->
+            <div class="form-card">
+                <h2>Enter Your Study Details</h2>
+                <p class="form-subtitle">Fill in the fields below as accurately as possible.</p>
+
+                {% if error_message %}
+                <div class="error-box">
+                    ⚠️ {{ error_message }}
+                </div>
+                {% endif %}
+
+                <form id="predictForm" method="POST" action="{{ url_for('predict') }}">
+
+                    <div class="form-group">
+                        <label for="study_hours">Study Hours (per day)</label>
+                        <input type="number" step="0.1" min="0" max="24" name="study_hours"
+                               id="study_hours" placeholder="e.g. 4.5" required
+                               value="{{ request.form.get('study_hours', '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendance">Attendance (%)</label>
+                        <input type="number" step="0.1" min="0" max="100" name="attendance"
+                               id="attendance" placeholder="e.g. 85" required
+                               value="{{ request.form.get('attendance', '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="previous_score">Previous Exam Score</label>
+                        <input type="number" step="0.1" min="0" max="100" name="previous_score"
+                               id="previous_score" placeholder="e.g. 70" required
+                               value="{{ request.form.get('previous_score', '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assignments_completed">Assignments Completed (out of 10)</label>
+                        <input type="number" step="1" min="0" max="10" name="assignments_completed"
+                               id="assignments_completed" placeholder="e.g. 8" required
+                               value="{{ request.form.get('assignments_completed', '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sleep_hours">Sleep Hours (per night)</label>
+                        <input type="number" step="0.1" min="0" max="24" name="sleep_hours"
+                               id="sleep_hours" placeholder="e.g. 7" required
+                               value="{{ request.form.get('sleep_hours', '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="internet_access">Internet Access</label>
+                        <select name="internet_access" id="internet_access" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="submitBtn">Predict Score</button>
+                </form>
+
+                <!-- Loading spinner, hidden by default, shown via script.js -->
+                <div id="loadingSpinner" class="loading-spinner hidden">
+                    <div class="spinner"></div>
+                    <p>Calculating prediction...</p>
+                </div>
+            </div>
+
+            <!-- Right side: Result card (only shows if a prediction was made) -->
+            <div class="result-card">
+                {% if result %}
+                    <h2>Prediction Result</h2>
+
+                    <div class="score-circle
+                        {% if result.category == 'Excellent' %}category-excellent
+                        {% elif result.category == 'Good' %}category-good
+                        {% elif result.category == 'Average' %}category-average
+                        {% else %}category-poor{% endif %}">
+                        <span class="score-value">{{ result.score }}%</span>
+                    </div>
+
+                    <p class="category-label">
+                        Performance Category:
+                        <strong>{{ result.category }}</strong>
+                    </p>
+
+                    <div class="suggestions-box">
+                        <h3>Suggestions for Improvement</h3>
+                        <ul>
+                            {% for tip in result.suggestions %}
+                            <li>{{ tip }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="result-placeholder">
+                        <div class="placeholder-icon">📈</div>
+                        <p>Your predicted score and suggestions will appear here after you submit the form.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Student Performance Predictor &copy; 2026 | Built with Flask &amp; Scikit-learn</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
